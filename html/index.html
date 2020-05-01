@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-l7xaoY0cJM4h9xh1RfazbgJVUZvdtyLWPueWNtLAphf/UbBgOVzqbOTogxPwYLHM" crossorigin="anonymous">
     <link rel="stylesheet"href="style.css">
     
     <title>Giphy search site</title>
+
 </head>
 <body>
+    <div>
+    <nav role="navigation">
+        <div id="menuToggle">
+            <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+                <a href="#"><li>Home</li></a>
+                <a href="#"><li>About</li></a>
+                <a href="#"><li>Info</li></a>
+                <a href="#">
+        </div>
+      </nav>
+      
     
-<header>
-    <h1>Giphy Search</h1>
-   
+        <h1>Giphy API Example</h1>
+        <div>
+            <form>
+              <input type="search" name="search" />
+              <button type="submit">Search</button> 
+            </form>
+          </div>
+        
+    
+    <div id="results"></div>
 
 <section>
     <div class="giphy">
