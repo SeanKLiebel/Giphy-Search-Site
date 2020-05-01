@@ -174,13 +174,7 @@ header h1{
     letter-spacing: 0.2em;
     color:white;
 }
-form {
-    display: flex;
-    flex-wrap: wrap;
-    width: 85%;
-    margin: 0 auto;
-  }
-  
+//Removed Unnecessary form//
   input[type="search"] {
     border: none;
     whitespace: wrap;
