@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-l7xaoY0cJM4h9xh1RfazbgJVUZvdtyLWPueWNtLAphf/UbBgOVzqbOTogxPwYLHM" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet"href="style.css">
     
     <title>Giphy search site</title>
@@ -11,60 +12,67 @@
 </head>
 <body>
     <div>
-    <nav role="navigation">
-        <div id="menuToggle">
-            <input type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-                <a href="#"><li>Home</li></a>
-                <a href="#"><li>About</li></a>
-                <a href="#"><li>Info</li></a>
-                <a href="#">
-        </div>
-      </nav>
+        <nav class="navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle"data-toggle="collapse"data target="myNavbar"></button>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"><img src="giphy_logo.png"width="100" height="45"></a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Services</a></li>
+                  <li><a href="#">Testimonials</a></li>
+                  <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       
     
-        <h1>Giphy API Example</h1>
-        <div>
-            <form>
-              <input type="search" name="search" />
-              <button type="submit">Search</button> 
-            </form>
-          </div>
         
-    
+        
+        <header>
+            <div class="title-search-bar">
+        <h1>Giphy Pictures for your enjoyment</h1>
+        <p><strong>Search for your favorites!</strong></p>
+        <div id="buttons"></div>
+        <div class="search-bar">
+            <input type="text" name="query" id="user-search" />
+            <input id="submit" type="button" value="Submit" class="btn  btn-sm btn-success" />
+            <input type="button" class="trending btn btn-sm btn-danger" value="See what's trending" />
+        </div>
+    </div>
+    <hr>
     <div id="results"></div>
+             
+
+             </div>  
+        </header>
+        
+
+    
 
 <section>
     <div class="giphy">
         <a href="https://giphy.com/" target="_blank">
-        <img src="https://res.cloudinary.com/beumsk/image/upload/v1520544016/giphy-logo-6611-s-_vme7aa.png" alt="giphy"></a>
+       
     </div>
 </section>
 
+
+
+</aside>
 <footer>
-    <p>
-        Created by
-        <a href="#" target="_blank">Sean Liebel</a>
-        <a href="#" target="_blank">Giphy API</a>
-    </p>
-</footer>
-    
-    
-            
-
-
-        </div>
-    </div>
-         
-            
-            </div>
-        </div>
-    </form>
+        
+        <p>&copy; 2020 Sean K. Liebel</p>
+    </footer>
 </div>
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
