@@ -1,50 +1,79 @@
-function getGiphyData() {
-    //Get giphy data
-    var searchTerm = document.querySelector("#search").value;
-    var url =
-      "https://api.giphy.com/v1/gifs/search?api_key=wOkuLOpg0lyr0TN1NMtr0qIAsJpFW7rn&q=" +
-      searchTerm;
-  
-    fetch(url)
-      .then(data => data.json())
-      .then(res => {
-        console.log(res);
-  
-        var arrayOfGifs = res.data;
-        var rand = Math.floor(Math.random() * arrayOfGifs.length);
-        var firstItem = arrayOfGifs[rand];
-        var giphyLink = firstItem.images.fixed_width.url;
-        //makes giphy appear on page
-        document.querySelector("#gif").setAttribute("src", giphyLink);
-      })
-      .catch(error => console.log(error));
+// Initial Search Buttons
+var topics = ["Dogs", "Meme's", "News", "Space", "Music"];
+function addSearchBtns() {
+  $("#buttons").html("");
+  for (i = 0; i < topics.length; i++) {
+    var $button = $("<input type='button' class='btn btn-sm search-btn' />");
+    $button.val(topics[i]);
+    $("#buttons").append($button);
   }
-  
-  function getTrendingData() {
-    var url =
-      "https://api.giphy.com/v1/gifs/trending?api_key=wOkuLOpg0lyr0TN1NMtr0qIAsJpFW7rn&q";
-  
-    fetch(url)
-      .then(data => data.json())
-      .then(res => {
-        console.log(res);
-        var _outputHTML = ""
-        var _tenGifs = document.getElementById("tenGifs");
-      //  document.querySelector("#gif1").setAttribute("src", giphyLink);
-        if (res.data.length < 10) return; // if not ten quit for now
-        for(let i=0; i< 10 ;i++) {
-          // add 10 gifs by appending new elements to the div #tenGifs
-          var node = document.getElementById("gif~"+i);      
-          node.setAttribute("src", res.data[i].images.fixed_width.url);
-          _tenGifs.appendChild(node);  
-          
+}
+addSearchBtns();
+
+$(document).on("click", ".btn", function() {
+  $("#results").html("");
+  // Beginning API call
+  var queryURL = "https://api.giphy.com/v1/gifs/search?";
+  var query;
+  var params = {
+    q: query,
+    limit: 10,
+    api_key: "aFFKTuSMjd6j0wwjpFCPXZipQbcnw3vB",
+    fmt: "json"
+  };
+  if ($(this).hasClass("search-btn")) {
+    query = $(this).val();
+  } else if ($("#user-search").val() !== "") {
+    query = $("#user-search").val();
+    topics.push(query);
+    if (topics.length > 6) {
+      topics.shift();
+    }
+    addSearchBtns();
+  }
+  params.q = query;
+
+  if ($(this).hasClass("trending")) {
+    queryURL = "https://api.giphy.com/v1/gifs/trending?";
+    delete params.q;
+  }
+  $.ajax({
+    url: queryURL + $.param(params),
+    method: "GET",
+    success: function(r) {
+      for (i = 0; i < params.limit; i++) {
+        var $img = $("<img>");
+        var $div = $("<div>");
+        var $rating = $("<h6>");
+        var gifObj = r.data[i];
+        var gif = gifObj.images;
+
+        // Image builder object
+        $img.attr({
+          // "width": "200px",
+          src: gif.fixed_height_still.url,
+          "data-animate": gif.fixed_height.url,
+          "data-still": gif.fixed_height_still.url,
+          "data-state": "still",
+          class: "gif"
+        });
+        // $div.attr("id", "gif-" + i);
+        $div.addClass("gif-box");
+        $rating.text("Rating: " + gifObj.rating);
+        $div.append($img, $rating);
+        $("#results").append($div);
+      }
+
+      $(".gif").on("click", function() {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
         }
-        
-        
       });
-  }
-  
-  function setFavorite(imgId) {
-    // save favorite for later
-  }
-  
+    }
+  });
+});
